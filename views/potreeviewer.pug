@@ -1,0 +1,35 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="description" content="")
+        meta(name="author" content="")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" type="text/css" href="/potreelibs/potree.css")
+        link(rel="stylesheet" type="text/css" href="/potreelibs/libs/jquery-ui/jquery-ui.min.css")
+        link(rel="stylesheet" type="text/css" href="potreelibs/libs/openlayers3/ol.css")
+        link(rel="stylesheet" type="text/css" href="potreelibs/libs/spectrum/spectrum.css")
+        link(rel="stylesheet" type="text/css" href="potreelibs/libs/jstree/themes/mixed/style.css")
+        title Облако точек: "ООО Метур. Батайск, Комарова 204 "
+    body
+        script(src="potreelibs/libs/jquery/jquery-3.1.1.min.js")
+        script(src="potreelibs/libs/spectrum/spectrum.js")
+        script(src="potreelibs/libs/jquery-ui/jquery-ui.min.js")
+        
+        script(src="potreelibs/libs/other/BinaryHeap.js")
+        script(src="potreelibs/libs/tween/tween.min.js")
+        script(src="potreelibs/libs/d3/d3.js")
+        script(src="potreelibs/libs/proj4/proj4.js")
+        script(src="potreelibs/libs/openlayers3/ol.js")
+        script(src="potreelibs/libs/i18next/i18next.js")
+        script(src="potreelibs/libs/jstree/jstree.js")
+        script(src="potreelibs/libs/jstree/jstree.js")
+        script(src="potreelibs/potree.js")
+
+        div(class="potree_container" style="position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; ")
+            div(id="potree_render_area" style="background-image: url('/potreelibs/resources/images/background.jpg');") 
+            div(id="potree_sidebar_container")
+        script(src='/javascripts/meturpotreescript.js' type="module")
+    
+    
