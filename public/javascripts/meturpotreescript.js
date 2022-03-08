@@ -1,7 +1,8 @@
 import * as THREE from "../potreelibs/libs/three.js/build/three.module.js";
 	
 		window.viewer = new Potree.Viewer(document.getElementById("potree_render_area"));
-		
+		//???????
+		viewer.setServer("http://localhost:3021");
 		viewer.setEDLEnabled(true);
 		viewer.setFOV(60);
 		viewer.setPointBudget(10_000_000);
@@ -13,19 +14,59 @@ import * as THREE from "../potreelibs/libs/three.js/build/three.module.js";
 		 Съемка выполнена  <a href='https://project-euro.ru/' target=blank>ООО "Евростройпроект"</a> 14.12.2021.`);
 
 		viewer.loadGUI(() => {
-			/*viewer.setLanguage('en');
-			$("#menu_appearance").next().show();
-		*/
-			//viewer.toggleSidebar();
-
+			viewer.setLanguage('en');
 			$("#menu_tools").next().show();
 			$("#menu_scene").next().show();
 			viewer.toggleSidebar();
-			viewer.profileWindow.show();
-			viewer.profileWindowController.setProfile(viewer.scene.profiles[0]);
 		});
 		
-		
+		Potree.loadPointCloud("https://storage.yandexcloud.net/potreeclouds/metur20mm/cloud.js", "Metur", async e => {
+			let scene = viewer.scene;
+			let pointcloud = e.pointcloud;
+			let material = pointcloud.material;
+			scene.addPointCloud(pointcloud);
+			material.pointSizeType = Potree.PointSizeType.FIXED;
+			material.size = 1;
+			viewer.fitToScreen();
+			// ДОБАВЛЯЕМ SHAPE
+			{
+				const loader = new Potree.ShapefileLoader();
+				let shapeNode = new THREE.Object3D();
+				viewer.scene.scene.add(shapeNode);
+
+				const shpTopo = await loader.load("https://storage.yandexcloud.net/potreeclouds/metur20mm/shp1/BatMetur1.shp")
+				shapeNode.add(shpTopo.node);
+				shpTopo.node.traverse(node => {
+				if(node.material){
+				node.material.color.setRGB(0.5, 0, 0.5)
+				}
+				});
+				// this is necessary so that fat lines are correctly sized
+				viewer.addEventListener("update", () => {
+				const size = viewer.renderer.getSize(new THREE.Vector2());
+				shpTopo.setResolution(size.width, size.height);
+				});
+					
+				viewer.onGUILoaded(() => {
+				// Add entry to object list in sidebar
+					let tree = $(`#jstree_scene`);
+					let parentNode = "other";
+
+					let shpTopoID = tree.jstree('create_node', parentNode, { 
+							"text": "topo", 
+							"icon": `${Potree.resourcePath}/icons/triangle.svg`,
+							"object": shpTopo.node,
+							"data": shpTopo.node,
+						}, 
+						"last", false, false);
+					tree.jstree(shpTopo.node.visible ? "check_node" : "uncheck_node", shpTopoID);
+				});
+			}
+			
+		});
+
+
+		/*
 		Potree.loadPointCloud("https://storage.yandexcloud.net/potreeclouds/metur20mm/cloud.js", "Metur", function(e){
 			viewer.scene.addPointCloud(e.pointcloud);
 			
@@ -35,34 +76,8 @@ import * as THREE from "../potreelibs/libs/three.js/build/three.module.js";
 			
 			viewer.fitToScreen();
 		
-				
-// Начало аннотаций
-{
-let scene = viewer.scene;
-			scene.annotations.add(new Potree.Annotation({
-						position: [2207631, 409813, 25],
-						cameraPosition: [2207631, 409813, 12],
-						cameraTarget: [2207670, 409925, 46],
-						title: "Вид внутри"
-					}));
-			scene.annotations.add(new Potree.Annotation({
-						position: [2207648, 409863, 25],
-						cameraPosition: [2207648, 409863, 18],
-						cameraTarget: [2207680, 409808, 15],
-						title: "Вид на подкрановые"
-					}));
-
-}			
-//Конец аннотаций
-{ // PROFILE
-			let profile = new Potree.Profile();
-			profile.name = "Поперечный профиль";
-			profile.setWidth(2)
-			profile.addMarker(new THREE.Vector3(2207620, 409845.247, 27.944));
-			profile.addMarker(new THREE.Vector3(2207660, 409839.590, 32.451));
-			viewer.scene.addProfile(profile);
-		}
-
-
-		});
+		//SHAPEFILES START
 		
+		// SHAPEFILES END		
+		});
+		*/

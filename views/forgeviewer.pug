@@ -1,0 +1,34 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Документация объекта по адресу: "Батайск, Комарова 204"
+        link(rel='shortcut icon', href='/images/logo.svg')
+        script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+        script(src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js")
+        script(src="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.7/jstree.min.js")
+        link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css")
+        link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.7/themes/default/style.min.css")
+        link(rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/style.min.css" type="text/css")
+        script(src="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/viewer3D.min.js")
+        link(href="stylesheets/autodesk/main.css" rel="stylesheet")
+        script(src="javascripts/ForgeTree.js")
+        script(src="javascripts/ForgeViewer.js")
+    body 
+        nav(class="navbar navbar-default navbar-fixed-top")
+            .container-fluid
+                ul(class="nav navbar-nav left")
+                    li
+                        a(href="https://www.spk.ru/" target="_blank")
+                            img(alt="Сталепромышленная компания" src="images/logo-title.svg")
+        div(class="container-fluid fill")
+            div(class="row fill")
+                div(class="col-sm-4 fill")
+                    div(class="panel panel-default fill")
+                        div(class="panel-heading" data-toggle="tooltip") Проекты и модели
+                            span(id="refreshBuckets" class="glyphicon glyphicon-refresh" style="cursor: pointer")
+                        div(id="appBuckets")
+                div(class="col-sm-8 fill")
+                    #forgeViewer

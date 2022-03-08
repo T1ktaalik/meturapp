@@ -10,27 +10,12 @@ const cors = require('cors');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-//The dependencies of the Metur app 
-var pointCloud = require('./routes/pointcloud')
-var forgeViewerMetur = require('./routes/forgeviewer/forgeviewermetur')
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-
-//CORS for yandex cloud storage
-/*
-app.use(
-  cors({
-    //origin: '*',
-    origin: 'https://storage.yandexcloud.net/potreeclouds/metur20mm/cloud.js',
-    origin: 'http://127.0.0.1:3021',
-
-  })
-)*/
-
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -42,9 +27,10 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 //The routes of the Metur app 
-app.use('/pointcloud', pointCloud);
-app.use('/forgeViewerMetur', forgeViewerMetur)
-
+app.use('/pointcloud', require('./routes/pointcloud'));
+app.use('/forgeViewerMetur', require('./routes/forgeviewer/forgeviewermetur'))
+app.use('/oauth', require('./routes/forgeviewer/oauth'));
+app.use('/oss', require('./routes/forgeviewer/oss'))
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

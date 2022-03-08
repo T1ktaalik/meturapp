@@ -1,6 +1,6 @@
 const { AuthClientTwoLegged } = require('forge-apis');
 
-const config = require('../../config');
+const config = require('../config');
 
 /**
  * Initializes a Forge client for 2-legged authentication.
