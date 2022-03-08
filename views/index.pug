@@ -1,12 +1,28 @@
-extends layout
-
-block content
-  h1 Просматривайте проектную документацию онлайн
-  h2 Содержание сайта
-    p На сайте размещены материалы проектной, изыскательской документации, разработанной компанией "Евростройпроект" для объекта, расположенного по адресу: Ростовская область, г. Батайск, ул. Комарова, 204.
-    br
-    a(href="/pointcloud") Смотрите облако здесь.
-    br
-    a(href="/forgeviewermetur") Смотрите проект и модели здесь.
-    br
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="description" content="")
+    meta(name="author" content="Евростройпроект")
+    title Проект "Метур" в Батайске
+    link(rel='shortcut icon', href='/images/logo.svg')
+    link(href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" rel="stylesheet")
+    
+  body
+  div(class="jumbotron text-center")
+    div(class="container")
+      h1(class="jumbotron-heading") Смотрите проект онлайн
+      p(class="lead text-muted") На сайте размещены материалы проектной и изыскательской документации, разработанной компанией "Евростройпроект" для объекта, расположенного по адресу: Ростовская область, г. Батайск, ул. Комарова, 204.
+      p
+        a(href="/pointcloud" class="btn btn-primary my-2") Смотреть облако
+        br
+        a(href="/forgeviewermetur" class="btn btn-primary my-2") Смотреть проект
+        
+       
+        
+        
+      
+     
    
